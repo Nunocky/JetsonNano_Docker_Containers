@@ -1,0 +1,3 @@
+#!/bin/sh
+docker run -it --rm --runtime nvidia --network host --name tensorflow -v/mnt/nas/TF:/tf tensorflow:1 
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# logdirの場所は適当に
+docker exec -it tensorflow tensorboard --host 0.0.0.0 --logdir /tf/log
