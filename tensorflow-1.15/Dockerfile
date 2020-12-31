@@ -15,20 +15,7 @@ RUN pip3 install opencv-contrib-python
 RUN mkdir /tf
 RUN chmod 777 /tf
 
-# ユーザーを作成
-ARG USER=docker
-ARG UID=1000
-RUN useradd -m -u ${UID} ${USER}
-#RUN gpasswd -a ${USER} sudo
-RUN echo "${USER}:${USER}" | chpasswd
+ADD jupyter_notebook_config.py /root/.jupyter/
 
-#RUN rm -f ~/.cache/matplotlib/fontList.json
-ADD --chown=docker:docker jupyter_notebook_config.py /home/${USER}/.jupyter/
-#chownで USERを参照してくれない
-#ADD --chown=${USER}:${USER} jupyter_notebook_config.py /home/${USER}/.jupyter/
-
-# 作成したユーザーに切り替える
-USER ${UID}
-
-CMD ["jupyter", "notebook"]
+CMD ["jupyter", "notebook", "--allow-root"]
 
